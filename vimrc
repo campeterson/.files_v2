@@ -32,8 +32,11 @@ set incsearch
 set list
 set listchars=trail:·,tab:\ \
 
+" http://georgebrock.github.io/talks/vim-completion/
 " Show line numbers
-set number
+"set number
+" Show relative line numbers
+set relativenumber
 
 " Show line, column, %, at bottom of window
 set ruler
@@ -70,11 +73,11 @@ call plug#begin('~/.vim/plugged')
 "https://github.com/hashivim/vim-terraform
 Plug 'hashivim/vim-terraform'
 "https://github.com/ctrlpvim/ctrlp.vim
-Plug 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd= 'CtrlP'
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-set wildignore+=*/tmp/*,*/target/*,*/compiled*
+"Plug 'ctrlpvim/ctrlp.vim'
+"let g:ctrlp_map = '<c-p>'
+"let g:ctrlp_cmd= 'CtrlP'
+"let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+"set wildignore+=*/tmp/*,*/target/*,*/compiled*
 
 "https://github.com/chrisbra/csv.vim/
 Plug 'chrisbra/csv.vim'
@@ -177,6 +180,8 @@ endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+"comment about autocmd!
 
 " Initialize plugin system
 call plug#end()
