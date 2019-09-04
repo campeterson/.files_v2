@@ -34,7 +34,7 @@ set listchars=trail:·,tab:\ \
 
 " http://georgebrock.github.io/talks/vim-completion/
 " Show line numbers
-"set number
+set number
 " Show relative line numbers
 set relativenumber
 
