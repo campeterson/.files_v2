@@ -183,5 +183,8 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 "comment about autocmd!
 
+"https://github.com/roman/golden-ratio
+Plug 'roman/golden-ratio'
+
 " Initialize plugin system
 call plug#end()
