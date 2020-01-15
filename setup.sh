@@ -3,7 +3,7 @@ if [ ! -d "$HOME/.tmp" ]; then
 fi
 
 if [ $# -eq 0 ]; then
-  files=`ls | grep -v 'setup.sh' | grep -v '.gitignore' | grep -v 'README.md' | grep -v '.gitmodules'` | grep -v '*.md'
+  files=`ls | grep -v 'setup.sh' | grep -v '.gitignore' | grep -v 'README.md' | grep -v '.gitmodules' | grep -v 'useful_commands.md'`
 else
   files=$@
 fi
