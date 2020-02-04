@@ -51,7 +51,7 @@ set showmode
 autocmd Filetype html setlocal ts=2 sts=2 sw=2 et
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2 et
 "autocmd Filetype javascript setlocal ts=4 sts=4 sw=4 noexpandtab
-autocmd Filetype python setlocal ts=8 sts=4 sw=4 et
+autocmd Filetype python setlocal ts=8 sts=4 sw=4 tw=79 et ai ff=unix
 
 " Support .boot and .hl files
 autocmd BufNewFile,BufRead *.hl     set filetype=clojure
@@ -64,6 +64,10 @@ set shiftwidth=2
 set expandtab
 
 colorscheme vilight-cterm
+
+" Highlight 80 char
+highlight ColorColumn ctermbg=darkgray
+call matchadd('ColorColumn', '\%81v', 100)
 
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
