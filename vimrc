@@ -131,7 +131,9 @@ Plug 'vim-scripts/paredit.vim'
 Plug 'kien/rainbow_parentheses.vim'
 "https://github.com/guns/vim-clojure-highlight
 Plug 'guns/vim-clojure-highlight'
-"https://github.com/tpope/vim-dispatch
+"https://github.com/tpope/vim-fireplace
+Plug 'tpope/vim-fireplace'
+"https://github.com/tpope/vim-fugitive
 Plug 'tpope/vim-dispatch'
 "https://github.com/tpope/vim-fugitive
 Plug 'tpope/vim-fugitive'

@@ -2,6 +2,13 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH="$PATH:/Users/campeterson/anaconda3/bin"
 
+# Java11 first
+export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
+
+# Add jenv
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/campeterson/.oh-my-zsh"
 
@@ -10,6 +17,9 @@ export ZSH="/Users/campeterson/.oh-my-zsh"
 if [ -f '/Users/campeterson/bin/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/campeterson/bin/google-cloud-sdk/path.zsh.inc'; fi
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/campeterson/bin/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/campeterson/bin/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Initialize direnv https://direnv.net/
+eval "$(direnv hook zsh)"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
