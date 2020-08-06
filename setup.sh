@@ -16,3 +16,6 @@ for file in $files; do
     ln -s `pwd`/$file $HOME/.$file
   fi
 done
+
+# Set up espanso
+ln -s ~/.files_v2/espanso ~/Library/Preferences/espanso
