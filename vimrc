@@ -76,12 +76,32 @@ call plug#begin('~/.vim/plugged')
 
 "https://github.com/hashivim/vim-terraform
 Plug 'hashivim/vim-terraform'
+
 "https://github.com/ctrlpvim/ctrlp.vim
-"Plug 'ctrlpvim/ctrlp.vim'
-"let g:ctrlp_map = '<c-p>'
-"let g:ctrlp_cmd= 'CtrlP'
-"let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-"set wildignore+=*/tmp/*,*/target/*,*/compiled*
+Plug 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd= 'CtrlP'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+set wildignore+=*/tmp/*,*/target/*,*/compiled*
+
+" " One of following
+" Plug 'ctrlpvim/ctrlp.vim
+" Plug 'junegunn/fzf'
+" Plug 'liuchengxu/vim-clap'
+
+" Requires
+Plug 'guns/vim-sexp',    {'for': 'clojure'}
+Plug 'liquidz/vim-iced', {'for': 'clojure'}
+
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'liquidz/vim-iced', {'for': 'clojure'}
+Plug 'liquidz/vim-iced-asyncomplete', {'for': 'clojure'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'liquidz/vim-iced-coc-source', {'for': 'clojure'}
+
+" Enable vim-iced's default key mapping
+" This is recommended for newbies
+let g:iced_enable_default_key_mappings = v:true
 
 "https://github.com/chrisbra/csv.vim/
 Plug 'chrisbra/csv.vim'
@@ -189,6 +209,8 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 "https://github.com/roman/golden-ratio
 Plug 'roman/golden-ratio'
+
+
 
 " Initialize plugin system
 call plug#end()

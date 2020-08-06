@@ -15,9 +15,9 @@ if [ -f '$HOME/bin/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/bin/goo
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-#ZSH_THEME="robbyrussell"
+ZSH_THEME="robbyrussell"
 #ZSH_THEME="random"
-ZSH_THEME="v2"
+#ZSH_THEME="v2"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -117,3 +117,25 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %
 alias ll="ls -lah"
 alias ta="tmux attach"
 alias tn="tmux new-session"
+
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+
+# Direnv - https://direnv.net/
+eval "$(direnv hook zsh)"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/campeterson/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/campeterson/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/campeterson/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/campeterson/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
