@@ -1,6 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH="$PATH:/Users/campeterson/anaconda3/bin"
+export PATH="$PATH:$HOME/anaconda3/bin"
 
 # Java11 first
 export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
@@ -10,13 +10,13 @@ export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/campeterson/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Google Cloud CLI
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/campeterson/bin/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/campeterson/bin/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '$HOME/bin/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/bin/google-cloud-sdk/path.zsh.inc'; fi
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/campeterson/bin/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/campeterson/bin/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '$HOME/bin/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/bin/google-cloud-sdk/completion.zsh.inc'; fi
 
 # Initialize direnv https://direnv.net/
 eval "$(direnv hook zsh)"
@@ -25,9 +25,9 @@ eval "$(direnv hook zsh)"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-#ZSH_THEME="robbyrussell"
+ZSH_THEME="robbyrussell"
 #ZSH_THEME="random"
-ZSH_THEME="v2"
+#ZSH_THEME="v2"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -127,3 +127,25 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %
 alias ll="ls -lah"
 alias ta="tmux attach"
 alias tn="tmux new-session"
+
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+
+# Direnv - https://direnv.net/
+eval "$(direnv hook zsh)"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/campeterson/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/campeterson/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/campeterson/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/campeterson/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+

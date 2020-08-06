@@ -51,7 +51,7 @@ set showmode
 autocmd Filetype html setlocal ts=2 sts=2 sw=2 et
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2 et
 "autocmd Filetype javascript setlocal ts=4 sts=4 sw=4 noexpandtab
-autocmd Filetype python setlocal ts=8 sts=4 sw=4 et
+autocmd Filetype python setlocal ts=8 sts=4 sw=4 tw=79 et ai ff=unix
 
 " Support .boot and .hl files
 autocmd BufNewFile,BufRead *.hl     set filetype=clojure
@@ -65,6 +65,10 @@ set expandtab
 
 colorscheme vilight-cterm
 
+" Highlight 80 char
+highlight ColorColumn ctermbg=darkgray
+call matchadd('ColorColumn', '\%81v', 100)
+
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
@@ -72,12 +76,32 @@ call plug#begin('~/.vim/plugged')
 
 "https://github.com/hashivim/vim-terraform
 Plug 'hashivim/vim-terraform'
+
 "https://github.com/ctrlpvim/ctrlp.vim
-"Plug 'ctrlpvim/ctrlp.vim'
-"let g:ctrlp_map = '<c-p>'
-"let g:ctrlp_cmd= 'CtrlP'
-"let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-"set wildignore+=*/tmp/*,*/target/*,*/compiled*
+Plug 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd= 'CtrlP'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+set wildignore+=*/tmp/*,*/target/*,*/compiled*
+
+" " One of following
+" Plug 'ctrlpvim/ctrlp.vim
+" Plug 'junegunn/fzf'
+" Plug 'liuchengxu/vim-clap'
+
+" Requires
+Plug 'guns/vim-sexp',    {'for': 'clojure'}
+Plug 'liquidz/vim-iced', {'for': 'clojure'}
+
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'liquidz/vim-iced', {'for': 'clojure'}
+Plug 'liquidz/vim-iced-asyncomplete', {'for': 'clojure'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'liquidz/vim-iced-coc-source', {'for': 'clojure'}
+
+" Enable vim-iced's default key mapping
+" This is recommended for newbies
+let g:iced_enable_default_key_mappings = v:true
 
 "https://github.com/chrisbra/csv.vim/
 Plug 'chrisbra/csv.vim'
@@ -187,6 +211,8 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 "https://github.com/roman/golden-ratio
 Plug 'roman/golden-ratio'
+
+
 
 " Initialize plugin system
 call plug#end()
