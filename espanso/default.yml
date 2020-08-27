@@ -1,38 +1,94 @@
 # espanso configuration file
 
-# This is the default configuration file, change it as you like it
-# You can refer to the official documentation:
 # https://espanso.org/docs/
 
-# Matches are the substitution rules, when you type the "trigger" string
-# it gets replaced by the "replace" string.
 matches:
-  # Simple text replacement
-  - trigger: ":espanso"
-    replace: "Hi there!"
-
   # Dates
   - trigger: ":date"
+    replace: "{{d}}"
+    vars:
+      - name: d
+        type: date
+        params:
+          format: "%m/%d/%Y"
+  - trigger: ":tagdate"
     replace: "{{tag_date}}"
     vars:
       - name: tag_date
         type: date
         params:
-          format: "%m/%d/%Y"
-
-  # Shell commands
-  - trigger: ":shell"
-    replace: "{{output}}"
+          format: "%Y/%m/%d"
+  - trigger: ":nicedate"
+    replace: "{{nice_date}}"
     vars:
-      - name: output
-        type: shell
+      - name: nice_date
+        type: date
         params:
-          cmd: "echo Hello from your shell"
+          format: "%B %d, %Y"
 
-  # https://github.com/calrobertlee/bear-app-mods/blob/24e25f017909148dcda05af0bdf19b9884065352/default.yml
-  # Bear Bi-directional link
-  - trigger: ":blink"
-    replace: "---\n\n## Other References\nReferences to [{{clipboard}}](bear://x-callback-url/search?term=%22{{output}}%22)\n\n[{{tag_date}}]"
+  - trigger: ":bearsearchlink"
+    replace: "[{{tag_date}}](bear://x-callback-url/search?term=%22{{yy}}%2F{{mm}}%2F{{dd}}%22)\n\n#_log/{{tag_date}}"
+    vars:
+      - name: tag_date
+        type: match
+        params:
+          trigger: ":tagdate"
+      - name: mm
+        type: date
+        params:
+          format: "%m"
+      - name: dd
+        type: date
+        params:
+          format: "%d"
+      - name: yy
+        type: date
+        params:
+          format: "%Y"
+
+  ## Bear Bi-directional log footer
+  - trigger: ":bearlogfooter"
+    replace: "\n\n---\n## Other References\nReferences to {{bearsearchlink}}"
+    vars:
+      - name: bearsearchlink
+        type: match
+        params:
+          trigger: ":bearsearchlink"
+
+  ## Bear Bi-directional log
+  - trigger: ":bearlog"
+    replace: "{{nice_date}} - Log\n---\n {{bear_log_footer}}"
+    vars:
+      - name: nice_date
+        type: match
+        params:
+          trigger: ":nicedate"
+      - name: bear_log_footer
+        type: match
+        params:
+          trigger: ":bearlogfooter"
+
+  ## https://github.com/calrobertlee/bear-app-mods/blob/24e25f017909148dcda05af0bdf19b9884065352/default.yml
+  ## Bear Bi-directional link
+  - trigger: ":bearlink"
+    replace: "{{clipboard}}\n\n---\n\n## Other References\nReferences to [{{clipboard}}](bear://x-callback-url/search?term=%22{{output}}%22)\n\n[{{tag_date}}]"
+    vars:
+      - name: clipboard
+        type: clipboard
+      - name: tag_date
+        type: date
+        params:
+          format: "%b %d, %Y at %I:%M %p"
+      - name: output
+        type: script
+        params:
+          args:
+            - python
+            - /Users/campeterson/Library/Preferences/espanso/script_replace-spaces.py
+              #
+  ## Bear Bi-directional link
+  - trigger: ":bearidea"
+    replace: "{{clipboard}}\n#ideas\n\n---\n\n\n---\n## Other References\nReferences to [{{clipboard}}](bear://x-callback-url/search?term=%22{{output}}%22)\n\n[{{tag_date}}]"
     vars:
       - name: clipboard
         type: clipboard
@@ -47,50 +103,35 @@ matches:
             - python
             - /Users/campeterson/Library/Preferences/espanso/script_replace-spaces.py
 
-  # https://github.com/calrobertlee/bear-app-mods/blob/24e25f017909148dcda05af0bdf19b9884065352/default.yml
-  # Bear Bi-directional date
-  - trigger: ":bidate"
-    replace: "---\n\n## Other References\nReferences to [{{tag_date}}](bear://x-callback-url/search?term=%22{{yy}}%2F{{mm}}%2F{{dd}}%22)\n\n#_log/{{tag_date}}"
-    vars:
-      - name: tag_date
-        type: date
-        params:
-          #format: "%b %d, %Y"
-          format: "%Y/%m/%d"
-      - name: mm
-        type: date
-        params:
-          format: "%m"
-      - name: dd
-        type: date
-        params:
-          format: "%d"
-      - name: yy
-        type: date
-        params:
-          format: "%Y"
+  ## https://github.com/calrobertlee/bear-app-mods/blob/24e25f017909148dcda05af0bdf19b9884065352/default.yml
+  ## Bear Bi-directional date
+  #- trigger: ":bidate"
+    #replace: "---\n\n## Other References\nReferences to [{{tag_date}}](bear://x-callback-url/search?term=%22{{yy}}%2F{{mm}}%2F{{dd}}%22)\n\n#_log/{{tag_date}}"
+    #vars:
+      #- name: tag_date
+        #type: date
+        #params:
+          ##format: "%b %d, %Y"
+          #format: "%Y/%m/%d"
+      #- name: mm
+        #type: date
+        #params:
+          #format: "%m"
+      #- name: dd
+        #type: date
+        #params:
+          #format: "%d"
+      #- name: yy
+        #type: date
+        #params:
+          #format: "%Y"
 
-  # Bear Bi-directional date
-  - trigger: ":bilog"
-    replace: "{{nicedate}} - Log\n---\n\n\n\n---\n\n## Other References\nReferences to [{{tag_date}}](bear://x-callback-url/search?term=%22{{yy}}%2F{{mm}}%2F{{dd}}%22)\n\n#_log/{{tag_date}}"
+  ######################### Other ###########################
+  # Shell commands
+  - trigger: ":shell"
+    replace: "{{output}}"
     vars:
-      - name: nicedate
-        type: date
+      - name: output
+        type: shell
         params:
-          format: "%B %d, %Y"
-      - name: tag_date
-        type: date
-        params:
-          format: "%Y/%m/%d"
-      - name: mm
-        type: date
-        params:
-          format: "%m"
-      - name: dd
-        type: date
-        params:
-          format: "%d"
-      - name: yy
-        type: date
-        params:
-          format: "%Y"
+          cmd: "echo Hello from your shell"
