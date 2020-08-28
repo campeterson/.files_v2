@@ -81,7 +81,7 @@ matches:
             - /Users/campeterson/Library/Preferences/espanso/script_replace-spaces.py
 
   - trigger: ":bearclipboardsearchlink"
-    replace: "[🔗 {{clipboard}} - REFERENCES]({{bear_clipboard_search_url}})"
+    replace: "[🔗 {{clipboard}} - REF]({{bear_clipboard_search_url}})"
     vars:
       - name: clipboard
         type: clipboard
