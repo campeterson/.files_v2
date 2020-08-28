@@ -90,7 +90,7 @@ matches:
         params:
           trigger: ":bearclipboardsearchurl"
 
-  - trigger: ":searchlink"
+  - trigger: ":sl"
     replace: "{{bear_clipboard_search_link}}"
     vars:
       - name: bear_clipboard_search_link
@@ -98,8 +98,9 @@ matches:
         params:
           trigger: ":bearclipboardsearchlink"
 
-  - trigger: ":reffooter"
-    replace: "\n---\n## Other References\n{{bear_clipboard_search_link}}\n[{{date_and_time}}]"
+  - trigger: ":refline"
+    #replace: "\n---\n{{bear_clipboard_search_link}} created -> {{date_and_time}}"
+    replace: "\n---\n{{bear_clipboard_search_link}}\n---\n"
     vars:
       - name: clipboard
         type: clipboard
@@ -113,24 +114,24 @@ matches:
           trigger: ":dateandtime"
 
   - trigger: ":nnote"
-    replace: "{{clipboard}}\n---\n\n{{ref_footer}}"
+    replace: "{{clipboard}}{{ref_line}}\n"
     vars:
       - name: clipboard
         type: clipboard
-      - name: ref_footer
+      - name: ref_line
         type: match
         params:
-          trigger: ":reffooter"
+          trigger: ":refline"
 
-  - trigger: ":idea"
-    replace: "{{clipboard}}\n#ideas\n\n---\n\n{{ref_footer}}"
+  - trigger: ":id"
+    replace: "{{clipboard}}\n#ideas\n{{ref_line}}\n"
     vars:
       - name: clipboard
         type: clipboard
-      - name: ref_footer
+      - name: ref_line_
         type: match
         params:
-          trigger: ":reffooter"
+          trigger: ":refline"
 
   ## https://github.com/calrobertlee/bear-app-mods/blob/24e25f017909148dcda05af0bdf19b9884065352/default.yml
   ## Bear Bi-directional date
