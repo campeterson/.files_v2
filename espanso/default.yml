@@ -1,16 +1,9 @@
 # espanso configuration file
 
 # https://espanso.org/docs/
+# https://github.com/calrobertlee/bear-app-mods/blob/24e25f017909148dcda05af0bdf19b9884065352/default.yml
 
 matches:
-  # Dates
-  - trigger: ":date"
-    replace: "{{d}}"
-    vars:
-      - name: d
-        type: date
-        params:
-          format: "%m/%d/%Y"
   - trigger: ":tagdate"
     replace: "{{tag_date}}"
     vars:
@@ -24,10 +17,17 @@ matches:
       - name: nice_date
         type: date
         params:
-          format: "%B %d, %Y"
+          format: "%b %d, %Y"
+  - trigger: ":dateandtime"
+    replace: "{{date_and_time}}"
+    vars:
+      - name: date_and_time
+        type: date
+        params:
+          format: "%b %d, %Y at %I:%M %p"
 
-  - trigger: ":bearsearchlink"
-    replace: "[{{tag_date}}](bear://x-callback-url/search?term=%22{{yy}}%2F{{mm}}%2F{{dd}}%22)\n\n#_log/{{tag_date}}"
+  - trigger: ":bearlogsearchlink"
+    replace: "[{{tag_date}}](bear://x-callback-url/search?term=%22{{yy}}%2F{{mm}}%2F{{dd}}%22)\n#_log/{{tag_date}}"
     vars:
       - name: tag_date
         type: match
@@ -48,12 +48,12 @@ matches:
 
   ## Bear Bi-directional log footer
   - trigger: ":bearlogfooter"
-    replace: "\n\n---\n## Other References\nReferences to {{bearsearchlink}}"
+    replace: "\n\n---\n## Other References\nReferences to {{bear_search_link}}\n"
     vars:
-      - name: bearsearchlink
+      - name: bear_search_link
         type: match
         params:
-          trigger: ":bearsearchlink"
+          trigger: ":bearlogsearchlink"
 
   ## Bear Bi-directional log
   - trigger: ":bearlog"
@@ -68,40 +68,69 @@ matches:
         params:
           trigger: ":bearlogfooter"
 
-  ## https://github.com/calrobertlee/bear-app-mods/blob/24e25f017909148dcda05af0bdf19b9884065352/default.yml
-  ## Bear Bi-directional link
-  - trigger: ":bearlink"
-    replace: "{{clipboard}}\n\n---\n\n## Other References\nReferences to [{{clipboard}}](bear://x-callback-url/search?term=%22{{output}}%22)\n\n[{{tag_date}}]"
+  - trigger: ":bearclipboardsearchurl"
+    replace: "bear://x-callback-url/search?term=%22{{output}}%22"
     vars:
       - name: clipboard
         type: clipboard
-      - name: tag_date
-        type: date
-        params:
-          format: "%b %d, %Y at %I:%M %p"
       - name: output
         type: script
         params:
           args:
             - python
             - /Users/campeterson/Library/Preferences/espanso/script_replace-spaces.py
-              #
-  ## Bear Bi-directional link
-  - trigger: ":bearidea"
-    replace: "{{clipboard}}\n#ideas\n\n---\n\n\n---\n## Other References\nReferences to [{{clipboard}}](bear://x-callback-url/search?term=%22{{output}}%22)\n\n[{{tag_date}}]"
+
+  - trigger: ":bearclipboardsearchlink"
+    replace: "[🔗 {{clipboard}} - REFERENCES]({{bear_clipboard_search_url}})"
     vars:
       - name: clipboard
         type: clipboard
-      - name: tag_date
-        type: date
+      - name: bear_clipboard_search_url
+        type: match
         params:
-          format: "%b %d, %Y at %I:%M %p"
-      - name: output
-        type: script
+          trigger: ":bearclipboardsearchurl"
+
+  - trigger: ":searchlink"
+    replace: "{{bear_clipboard_search_link}}"
+    vars:
+      - name: bear_clipboard_search_link
+        type: match
         params:
-          args:
-            - python
-            - /Users/campeterson/Library/Preferences/espanso/script_replace-spaces.py
+          trigger: ":bearclipboardsearchlink"
+
+  - trigger: ":reffooter"
+    replace: "\n---\n## Other References\n{{bear_clipboard_search_link}}\n[{{date_and_time}}]"
+    vars:
+      - name: clipboard
+        type: clipboard
+      - name: bear_clipboard_search_link
+        type: match
+        params:
+          trigger: ":bearclipboardsearchlink"
+      - name: date_and_time
+        type: match
+        params:
+          trigger: ":dateandtime"
+
+  - trigger: ":nnote"
+    replace: "{{clipboard}}\n---\n\n{{ref_footer}}"
+    vars:
+      - name: clipboard
+        type: clipboard
+      - name: ref_footer
+        type: match
+        params:
+          trigger: ":reffooter"
+
+  - trigger: ":idea"
+    replace: "{{clipboard}}\n#ideas\n\n---\n\n{{ref_footer}}"
+    vars:
+      - name: clipboard
+        type: clipboard
+      - name: ref_footer
+        type: match
+        params:
+          trigger: ":reffooter"
 
   ## https://github.com/calrobertlee/bear-app-mods/blob/24e25f017909148dcda05af0bdf19b9884065352/default.yml
   ## Bear Bi-directional date
