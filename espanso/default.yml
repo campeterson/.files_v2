@@ -3,7 +3,13 @@
 # https://espanso.org/docs/
 # https://github.com/calrobertlee/bear-app-mods/blob/24e25f017909148dcda05af0bdf19b9884065352/default.yml
 
+
 matches:
+  - trigger: ":flip"
+    replace: "(╯°□°）╯︵ ┻━┻"
+  - trigger: ":idk"
+    replace: "¯\\_(ツ)_/¯"
+
   - trigger: ":tagdate"
     replace: "{{tag_date}}"
     vars:
@@ -123,7 +129,7 @@ matches:
         params:
           trigger: ":refline"
 
-  - trigger: ":id"
+  - trigger: ":idea"
     replace: "{{clipboard}}\n#ideas\n{{ref_line}}\n"
     vars:
       - name: clipboard
