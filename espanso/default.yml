@@ -33,7 +33,7 @@ matches:
           format: "%b %d, %Y at %I:%M %p"
 
   - trigger: ":bearlogsearchlink"
-    replace: "[🔗 {{tag_date}} - REF](bear://x-callback-url/search?term=%22{{yy}}%2F{{mm}}%2F{{dd}}%22)\n#_log/{{tag_date}}"
+    replace: "[🔗 {{tag_date}} - REF](bear://x-callback-url/search?term=%22{{yy}}%2F{{mm}}%2F{{dd}}%22)"
     vars:
       - name: tag_date
         type: match
@@ -52,27 +52,22 @@ matches:
         params:
           format: "%Y"
 
-  ## Bear Bi-directional log footer
-  - trigger: ":bearlogfooter"
-    replace: "\n\n---\n## Other References\n{{bear_log_search_link}}\n"
-    vars:
-      - name: bear_log_search_link
-        type: match
-        params:
-          trigger: ":bearlogsearchlink"
-
   ## Bear Bi-directional log
-  - trigger: ":bearlog"
-    replace: "{{nice_date}} - Log\n---\n {{bear_log_footer}}"
+  - trigger: ":bl"
+    replace: "{{nice_date}} - Log\n {{bear_log_search_link}} #_log/{{tag_date}}#\n---\n"
     vars:
       - name: nice_date
         type: match
         params:
           trigger: ":nicedate"
-      - name: bear_log_footer
+      - name: bear_log_search_link
         type: match
         params:
-          trigger: ":bearlogfooter"
+          trigger: ":bearlogsearchlink"
+      - name: tag_date
+        type: match
+        params:
+          trigger: ":tagdate"
 
   - trigger: ":bearclipboardsearchurl"
     replace: "bear://x-callback-url/search?term=%22{{output}}%22"
@@ -105,8 +100,8 @@ matches:
           trigger: ":bearclipboardsearchlink"
 
   - trigger: ":refline"
-    #replace: "\n---\n{{bear_clipboard_search_link}} created -> {{date_and_time}}"
-    replace: "\n---\n{{bear_clipboard_search_link}}\n---\n"
+    replace: "{{bear_clipboard_search_link}} (created -> {{tag_date}})"
+    #replace: "{{bear_clipboard_search_link}}"
     vars:
       - name: clipboard
         type: clipboard
@@ -118,9 +113,13 @@ matches:
         type: match
         params:
           trigger: ":dateandtime"
+      - name: tag_date
+        type: match
+        params:
+          trigger: ":tagdate"
 
-  - trigger: ":nnote"
-    replace: "{{clipboard}}{{ref_line}}\n"
+  - trigger: ":bn"
+    replace: "{{clipboard}}\n---\n{{ref_line}}\n---\n"
     vars:
       - name: clipboard
         type: clipboard
@@ -129,12 +128,13 @@ matches:
         params:
           trigger: ":refline"
 
-  - trigger: ":idea"
-    replace: "{{clipboard}}\n#ideas\n{{ref_line}}\n"
+  - trigger: ":bi"
+    #replace: "{{clipboard}}\n#ideas\n{{ref_line}}\n"
+    replace: "{{clipboard}}\n---\n{{ref_line}} #ideas\n\n---\n"
     vars:
       - name: clipboard
         type: clipboard
-      - name: ref_line_
+      - name: ref_line
         type: match
         params:
           trigger: ":refline"

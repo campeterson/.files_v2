@@ -127,7 +127,7 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %
 alias ll="ls -lah"
 alias ta="tmux attach"
 alias tn="tmux new-session"
-alias tmata="tn -s brew -d && tn -s k9s -d && tn -s symphony -c ~/projects/Symphony/symphony-src -d && tn -s wayfinder -c ~/projects/Beehive/beehive-src -d && tn -s bigboard -c ~/projects/ATA-Big-Board/ -d && tn -s vafix -c ~/projects/VA-FIX/VA-Fix-src -d && tn -s roadmaps -c ~/projects/roadmaps -d"
+alias tmata="tn -s brew -d && tn -s k9s -d && tn -s symphony -c ~/projects/Symphony/symphony-src -d && tn -s Beeline -c ~/projects/Beehive/beehive-src -d && tn -s bigboard -c ~/projects/ATA-Big-Board/ -d && tn -s vafix -c ~/projects/VA-FIX/VA-Fix-src -d && tn -s roadmaps -c ~/projects/roadmaps -d && tn -s airdex-authority -c ~/projects/AirDEX/Authority/airdex-authority -d && tn -s airdex-data -c ~/projects/AirDEX/Data/airdex-data -d && echo 'Tmux sessions created'"
 
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
