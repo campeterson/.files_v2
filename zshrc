@@ -127,7 +127,7 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %
 alias ll="ls -lah"
 alias ta="tmux attach"
 alias tn="tmux new-session"
-alias tmata="tn -s brew -d && tn -s k9s -d && tn -s symphony -c ~/projects/Symphony/symphony-src -d && tn -s Beeline -c ~/projects/Beehive/beehive-src -d && tn -s bigboard -c ~/projects/ATA-Big-Board/ -d && tn -s vafix -c ~/projects/VA-FIX/VA-Fix-src -d && tn -s roadmaps -c ~/projects/roadmaps -d && tn -s airdex-authority -c ~/projects/AirDEX/Authority/airdex-authority -d && tn -s airdex-data -c ~/projects/AirDEX/Data/airdex-data -d && echo 'Tmux sessions created'"
+alias tmata="tn -s brew -d && tn -s espanso -c ~/.files_v2/espanso/ -d && tn -s beeline -c ~/projects/Beehive/beehive-src -d && tn -s airdex-authority -c ~/projects/AirDEX/Authority/airdex-authority -d && tn -s airdex-data -c ~/projects/AirDEX/Data/airdex-data -d && tn -s airboss -c ~/projects/AirDEX/AirBoss/ -d && echo 'Tmux sessions created' && ta"
 
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
@@ -150,3 +150,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

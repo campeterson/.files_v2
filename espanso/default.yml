@@ -119,7 +119,7 @@ matches:
           trigger: ":tagdate"
 
   - trigger: ":bn"
-    replace: "{{clipboard}}\n---\n{{ref_line}}\n---\n"
+    replace: "{{clipboard}}\n{{ref_line}}\n---\n"
     vars:
       - name: clipboard
         type: clipboard

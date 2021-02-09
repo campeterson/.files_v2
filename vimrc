@@ -212,7 +212,7 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 "https://github.com/roman/golden-ratio
 Plug 'roman/golden-ratio'
 
-
+Plug 'ctrlpvim/ctrlp.vim'
 
 " Initialize plugin system
 call plug#end()
