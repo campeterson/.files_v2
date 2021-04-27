@@ -1,0 +1,159 @@
+name: bear
+parent: default
+# espanso configuration file specifically for Bear app
+
+# https://espanso.org/docs/
+# https://github.com/calrobertlee/bear-app-mods/blob/24e25f017909148dcda05af0bdf19b9884065352/default.yml
+
+matches:
+  - trigger: ":tagdate"
+    replace: "{{tag_date}}"
+    vars:
+      - name: tag_date
+        type: date
+        params:
+          format: "%Y/%m/%d"
+  - trigger: ":nicedate"
+    replace: "{{nice_date}}"
+    vars:
+      - name: nice_date
+        type: date
+        params:
+          format: "%b %d, %Y"
+  - trigger: ":dateandtime"
+    replace: "{{date_and_time}}"
+    vars:
+      - name: date_and_time
+        type: date
+        params:
+          format: "%b %d, %Y at %I:%M %p"
+
+  - trigger: ":bearlogsearchlink"
+    replace: "[🔗 {{tag_date}} - REF](bear://x-callback-url/search?term=%22{{yy}}%2F{{mm}}%2F{{dd}}%22)"
+    vars:
+      - name: tag_date
+        type: match
+        params:
+          trigger: ":tagdate"
+      - name: mm
+        type: date
+        params:
+          format: "%m"
+      - name: dd
+        type: date
+        params:
+          format: "%d"
+      - name: yy
+        type: date
+        params:
+          format: "%Y"
+
+  ## Bear Bi-directional log
+  - trigger: ":bl"
+    replace: "{{nice_date}} - Log\n{{bear_log_search_link}} #_log/{{tag_date}}#\n---\n"
+    vars:
+      - name: nice_date
+        type: match
+        params:
+          trigger: ":nicedate"
+      - name: bear_log_search_link
+        type: match
+        params:
+          trigger: ":bearlogsearchlink"
+      - name: tag_date
+        type: match
+        params:
+          trigger: ":tagdate"
+
+  - trigger: ":bearclipboardsearchurl"
+    replace: "bear://x-callback-url/search?term=%22{{output}}%22"
+    vars:
+      - name: clipboard
+        type: clipboard
+      - name: output
+        type: script
+        params:
+          args:
+            - python
+            - /Users/campeterson/Library/Preferences/espanso/script_replace-spaces.py
+
+  - trigger: ":bearclipboardsearchlink"
+    replace: "[🔗 {{clipboard}} - REF]({{bear_clipboard_search_url}})"
+    vars:
+      - name: clipboard
+        type: clipboard
+      - name: bear_clipboard_search_url
+        type: match
+        params:
+          trigger: ":bearclipboardsearchurl"
+
+  - trigger: ":bsl"
+    replace: "{{bear_clipboard_search_link}}"
+    vars:
+      - name: bear_clipboard_search_link
+        type: match
+        params:
+          trigger: ":bearclipboardsearchlink"
+
+  - trigger: ":refline"
+    replace: "{{bear_clipboard_search_link}} (created -> {{tag_date}})"
+    #replace: "{{bear_clipboard_search_link}}"
+    vars:
+      - name: clipboard
+        type: clipboard
+      - name: bear_clipboard_search_link
+        type: match
+        params:
+          trigger: ":bearclipboardsearchlink"
+      - name: date_and_time
+        type: match
+        params:
+          trigger: ":dateandtime"
+      - name: tag_date
+        type: match
+        params:
+          trigger: ":tagdate"
+
+  - trigger: ":bn"
+    replace: "{{clipboard}}\n{{ref_line}}\n---\n"
+    vars:
+      - name: clipboard
+        type: clipboard
+      - name: ref_line
+        type: match
+        params:
+          trigger: ":refline"
+
+  - trigger: ":bi"
+    #replace: "{{clipboard}}\n#ideas\n{{ref_line}}\n"
+    replace: "{{clipboard}}\n{{ref_line}} #ideas\n---\n"
+    vars:
+      - name: clipboard
+        type: clipboard
+      - name: ref_line
+        type: match
+        params:
+          trigger: ":refline"
+
+  ## https://github.com/calrobertlee/bear-app-mods/blob/24e25f017909148dcda05af0bdf19b9884065352/default.yml
+  ## Bear Bi-directional date
+  #- trigger: ":bidate"
+    #replace: "---\n\n## Other References\nReferences to [{{tag_date}}](bear://x-callback-url/search?term=%22{{yy}}%2F{{mm}}%2F{{dd}}%22)\n\n#_log/{{tag_date}}"
+    #vars:
+      #- name: tag_date
+        #type: date
+        #params:
+          ##format: "%b %d, %Y"
+          #format: "%Y/%m/%d"
+      #- name: mm
+        #type: date
+        #params:
+          #format: "%m"
+      #- name: dd
+        #type: date
+        #params:
+          #format: "%d"
+      #- name: yy
+        #type: date
+        #params:
+          #format: "%Y"
