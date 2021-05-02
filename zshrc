@@ -5,7 +5,12 @@ export PATH="$PATH:$HOME/anaconda3/bin"
 # Java11 first
 export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
 
-# Add jenv
+# Add GraalVM
+export PATH=/Library/Java/JavaVirtualMachines/graalvm-ce-java11-21.0.0.2/Contents/Home/bin:$PATH
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/graalvm-ce-java11-21.0.0.2/Contents/Home
+
+
+# Ad jenv
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
 
@@ -13,10 +18,11 @@ eval "$(jenv init -)"
 export ZSH="$HOME/.oh-my-zsh"
 
 # Google Cloud CLI
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '$HOME/bin/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/bin/google-cloud-sdk/path.zsh.inc'; fi
 # The next line enables shell command completion for gcloud.
 if [ -f '$HOME/bin/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/bin/google-cloud-sdk/completion.zsh.inc'; fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '$HOME/bin/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/bin/google-cloud-sdk/path.zsh.inc'; fi
 
 # Initialize direnv https://direnv.net/
 eval "$(direnv hook zsh)"
@@ -129,9 +135,6 @@ alias ta="tmux attach"
 alias tn="tmux new-session"
 alias tmata="tn -s brew -d && tn -s espanso -c ~/.files_v2/espanso/ -d && tn -s beeline -c ~/projects/Beehive/beehive-src -d && tn -s airdex-authority -c ~/projects/AirDEX/Authority/airdex-authority -d && tn -s airdex-data -c ~/projects/AirDEX/Data/airdex-data -d && tn -s airboss -c ~/projects/AirDEX/AirBoss/ -d && echo 'Tmux sessions created' && ta"
 
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
-
 # Direnv - https://direnv.net/
 eval "$(direnv hook zsh)"
 
@@ -149,7 +152,6 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
