@@ -84,11 +84,6 @@ let g:ctrlp_cmd= 'CtrlP'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 set wildignore+=*/tmp/*,*/target/*,*/compiled*
 
-" " One of following
-" Plug 'ctrlpvim/ctrlp.vim
-" Plug 'junegunn/fzf'
-" Plug 'liuchengxu/vim-clap'
-
 " Requires
 Plug 'guns/vim-sexp',    {'for': 'clojure'}
 Plug 'liquidz/vim-iced', {'for': 'clojure'}
@@ -211,8 +206,6 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 "https://github.com/roman/golden-ratio
 Plug 'roman/golden-ratio'
-
-Plug 'ctrlpvim/ctrlp.vim'
 
 " Initialize plugin system
 call plug#end()

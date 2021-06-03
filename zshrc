@@ -9,10 +9,12 @@ export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
 export PATH=/Library/Java/JavaVirtualMachines/graalvm-ce-java11-21.0.0.2/Contents/Home/bin:$PATH
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/graalvm-ce-java11-21.0.0.2/Contents/Home
 
-
 # Ad jenv
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
+
+# Vim iced
+export PATH=$PATH:~/.vim/plugged/vim-iced/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -31,9 +33,9 @@ eval "$(direnv hook zsh)"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-#ZSH_THEME="robbyrussell"
+ZSH_THEME="robbyrussell"
 #ZSH_THEME="random"
-ZSH_THEME="v2"
+#ZSH_THEME="v2"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -129,6 +131,7 @@ alias gs="git status"
 alias ga="git add -p"
 alias gps="git push"
 alias gpl="git pull --rebase"
+alias gprs="git pull --recurse-submodules"
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias ll="ls -lah"
 alias ta="tmux attach"
@@ -155,3 +158,4 @@ unset __conda_setup
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+export LOCAL_OP=true
