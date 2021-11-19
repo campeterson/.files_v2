@@ -9,6 +9,100 @@ matches:
     replace: "(╯°□°）╯︵ ┻━┻"
   - trigger: ":idk"
     replace: "¯\\_(ツ)_/¯"
+  - trigger: ":av"
+    replace: >
+      "     __|__
+      \----o-(_)-o----/"
+  - trigger: ":horizontalstab"
+    replace: "        _____"
+  - trigger: ":verticalstab"
+    replace: "          |  "
+  - trigger: ":tail"
+    replace: "        __|__"
+  - trigger: ":pl"
+    replace: |
+             {{tail}}
+             \-----ø--(_)--ø-----/
+    # Ø Ø
+    vars:
+      - name: horizontalstab
+        type: match
+        params:
+          trigger: ":horizontalstab"
+      - name: verticalstab
+        type: match
+        params:
+          trigger: ":verticalstab"
+      - name: tail
+        type: match
+        params:
+          trigger: ":tail"
+  - trigger: ":kingair"
+    replace: |
+             {{horizontalstab}}
+             {{verticalstab}}
+             \-----ø--(_)--ø-----/
+    vars:
+      - name: horizontalstab
+        type: match
+        params:
+          trigger: ":horizontalstab"
+      - name: verticalstab
+        type: match
+        params:
+          trigger: ":verticalstab"
+      - name: tail
+        type: match
+        params:
+          trigger: ":tail"
+  - trigger: ":m600"
+    replace: |
+             {{tail}}
+             ---------(ø)---------
+    vars:
+      - name: tail
+        type: match
+        params:
+          trigger: ":tail"
+  - trigger: ":tbm"
+    replace: |
+             {{tail}}
+             \--------(ø)--------/
+    vars:
+      - name: tail
+        type: match
+        params:
+          trigger: ":tail"
+  #- trigger: ":tower"
+    #replace: |
+             #__|__
+             #\___/
+              #| |
+              #| |
+             #_|_|______________
+                    #/|\
+                  #*/ | \*
+                  #/ -+- \
+              #---o--(_)--o---
+                #/  0 " 0  \
+              #*/     |     \*
+              #/      |      \
+            #*/       |       \*
+
+  # https://www.asciiart.eu/vehicles/airplanes
+  #- trigger: ":jumbo"
+    #replace: |
+                                          #|
+                                          #|
+                                          #|
+                                        #.-'-.
+                                       #' ___ '
+                             #---------'  .-.  '---------
+             #_________________________'  '-'  '_________________________
+              #''''''-|---|--/    \==][^',_m_,'^][==/    \--|---|-''''''
+                            #\    /  ||/   H   \||  \    /
+                             #'--'   OO   O|O   OO   '--'
+
 
   ######################### Other ###########################
   # Shell commands

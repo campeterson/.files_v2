@@ -127,6 +127,7 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Custom aliases
+alias bu="brew upgrade && brew cleanup"
 alias gs="git status"
 alias ga="git add -p"
 alias gps="git push"
@@ -136,7 +137,7 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %
 alias ll="ls -lah"
 alias ta="tmux attach"
 alias tn="tmux new-session"
-alias tmata="tn -s brew -d && tn -s espanso -c ~/.files_v2/espanso/ -d && tn -s beeline -c ~/projects/Beehive/beehive-src -d && tn -s airdex-authority -c ~/projects/AirDEX/Authority/airdex-authority -d && tn -s airdex-data -c ~/projects/AirDEX/Data/airdex-data -d && tn -s airboss -c ~/projects/AirDEX/AirBoss/ -d && echo 'Tmux sessions created' && ta"
+alias tmata="tn -s brew -d && tn -s espanso -c ~/.files_v2/espanso/ -d && tn -s beeline -c ~/projects/Beehive/beehive-src -d && tn -s airdex-authority -c ~/projects/AirDEX/Authority/airdex-authority -d && tn -s airdex-data -c ~/projects/AirDEX/Data/airdex-data -d && tn -s AuthorityData -c ~/projects/AirDEX/airdex-authority-government-data -d && echo 'Tmux sessions created' && ta"
 
 # Direnv - https://direnv.net/
 eval "$(direnv hook zsh)"
@@ -159,3 +160,8 @@ unset __conda_setup
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 export LOCAL_OP=true
+
+# Doing this because of a bug: https://github.com/conda/conda/issues/9392
+conda deactivate
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
