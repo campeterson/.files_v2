@@ -9,6 +9,10 @@ matches:
     replace: "(╯°□°）╯︵ ┻━┻"
   - trigger: ":idk"
     replace: "¯\\_(ツ)_/¯"
+  - trigger: ":muscles"
+    replace: "/¯_(ツ)_¯\\"
+  - trigger: ":bb"
+    replace: "༼ つ ◕_◕ ༽つ"
   - trigger: ":av"
     replace: >
       "     __|__

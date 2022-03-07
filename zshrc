@@ -128,6 +128,7 @@ fi
 
 # Custom aliases
 alias bu="brew upgrade && brew cleanup"
+alias er="espanso restart"
 alias gs="git status"
 alias ga="git add -p"
 alias gps="git push"
