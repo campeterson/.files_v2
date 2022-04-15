@@ -91,8 +91,8 @@ Plug 'liquidz/vim-iced', {'for': 'clojure'}
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'liquidz/vim-iced', {'for': 'clojure'}
 Plug 'liquidz/vim-iced-asyncomplete', {'for': 'clojure'}
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'liquidz/vim-iced-coc-source', {'for': 'clojure'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'liquidz/vim-iced-coc-source', {'for': 'clojure'}
 
 " Enable vim-iced's default key mapping
 " This is recommended for newbies
